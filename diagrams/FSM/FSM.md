@@ -1,4 +1,4 @@
-### criar bloco chamado calc_offset ele vai receber o calculo (r_reg * G_IMG_WIDTH) + c_reg, um index, e as dimensões da imagem e calcular um offset para o proximo ciclo
+### criar bloco chamado calc_offset ele vai receber o calculo (r_reg * G_IMG_WIDTH) + c_reg, um index, e as dimensões da imagem e calcula um endereço da janela dependendo do index
 
 - registrador r_reg (row) 
 - registrador c_reg (column)
@@ -14,11 +14,9 @@
 
         done <= '0' (Sinaliza que o trabalho não está feito)
 
-        r_reg <= 0 (Prepara para começar na linha 1, não pulando a borda)
+        r_reg <= 0 (Prepara para começar na linha 0, não pulando a borda)
 
-        c_reg <= 0 (Prepara para começar na coluna 1, não pulando a borda)
-
-        ram_saida_we <= '0' (Garante que a escrita na RAM de saída está desligada)
+        c_reg <= 0 (Prepara para começar na coluna 0, não pulando a borda)
 
     Transição:
 
@@ -33,44 +31,54 @@
     Ações (no clock):
 
         ready <= '0' (Sinaliza que está ocupado)
+        index_reg <= 0 (Reseta o contador do loop da janela)
+        acumulador_reg <= 0 
 
-        acumulador_reg <= (others => '0') (Zera a soma)
 
-        index_reg <= 0 (Reseta o contador do loop interno)
+        //Endereço Base do Pixel atual, calculo transformando linha coluna em index continuo
+        calculo_addr_base = (r_reg * G_IMG_WIDTH) + c_reg
+        
+        addr_base_reg <= calculo_addr_base
 
-        addr_base_reg <= (r_reg * G_IMG_WIDTH) + c_reg (Calcula e salva o endereço base)
+        // Note que a entrada não pode ser a saida de addr_base_reg já q a saida só aparece no prox ciclo
+        window_addr = offset_calc(calculo_addr_base, 0, G_IMG_WIDTH, G_IMG_HEIGHT)
 
-        offset_end = offset_calc(addr_base_reg, 0, G_IMG_WIDTH, G_IMG_HEIGHT)
-
-        samples_mem_addr <= offset_end
+        //Lê o valor do endereço window_addr para usar no proximo ciclo
+        samples_mem_addr <= window_addr
 
     Transição:
 
         Vai para S_LOOP_CALCULA.
 
-## S_LOOP_CALCULA (Estado "Calcula [i] e Pede [i+1]")
+## S_LOOP_CALCULA
 
-    Função: O coração do loop. Roda 8 vezes (para index_reg de 0 a 7).
+    Função: O coração do loop. Roda 8 vezes (para index_reg de 0 a 8).
 
     Ações (no clock):
 
-        pixel_da_janela_reg <= rom_samples[offset_end] (O pixel index que foi pedido no ciclo anterior chegou. Ele é salvo).
+        //rom_sample é o valor lido anteriormente da memoria
+        rom_sample <= (ele é um sinal vindo direto da memoria)
 
-        produto = pixel_da_janela_reg * valor_do_kernel (Calcula usando o pixel salvo e o kernel[index] instantâneo).
+        //cada valor do kernel estará salvo em 9 registradores indexados via mux com o sinal index_reg
+        produto = rom_sample * kernel[index] (Calcula usando o pixel salvo e o kernel[index] instantâneo).
 
+        //Bota o resultado no Acomulador (aqui temos que tomar cuidado com a quantidade de bits para evitar overflow)
         acumulador_reg <= acumulador_reg + produto (Acumula o resultado).
 
-        offset_end = offset_calc(index_reg + 1) (Usa o MUX para calcular o endereço do próximo pixel).
+        //Calcula o end do proximo sample da janela
+        window_addr = offset_calc(addr_base_reg, index_reg + 1, G_IMG_WIDTH, G_IMG_HEIGHT)
 
-        samples_mem_addr <= offset_end (Pede o próximo pixel, index+1).
+        //Lê o valor do endereço window_addr para usar no proximo ciclo
+        samples_mem_addr <= window_addr
 
-        index_reg <= index_reg + 1 (Avança o contador do loop).
+        //incrementa o index em um para chegar aos 8 loops restantes
+        index_reg <= index_reg + 1
 
     Transição:
 
-        Se index_reg < 7 (ou seja, o índice atual é 0-6), fica em S_LOOP_CALCULA.
+        Se index_reg < 8 (ou seja, o índice atual é 0-6), fica em S_LOOP_CALCULA.
 
-        Se index_reg = 7 (significa que acabamos de pedir o último pixel, o 8), vai para S_FINALIZA_E_ESCREVE.
+        Se index_reg = 8 (significa que acabamos de pedir o último pixel, o 8), vai para S_FINALIZA_E_ESCREVE.
 
 ## S_FINALIZA_E_ESCREVE (Estado "Calcula 8 e Escreve")
 
@@ -78,9 +86,10 @@
 
     Ações (no clock):
 
-        pixel_da_janela_reg <= dado_da_rom_samples (O último pixel, index=8, chegou. Ele é salvo).
+        //rom_sample é o valor lido anteriormente da memoria
+        rom_sample <= (ele é um sinal vindo direto da memoria)
 
-        produto_final = pixel_da_janela_reg * kernel_mem[8] (Cálculo final. index_reg agora é 8).
+        produto_final = rom_sample * kernel_mem[8] (Cálculo final. index_reg agora é 8).
 
         resultado_bruto = acumulador_reg + produto_final (Soma final, combinacional).
 
@@ -89,8 +98,6 @@
         ram_saida_addr <= addr_base_reg (O endereço de saída é o (r*B+c) que já salvamos).
 
         ram_saida_data <= resultado_final (Coloca o dado na porta de saída).
-
-        ram_saida_we <= '1' (Liga a escrita!).
 
     Transição:
 
@@ -101,8 +108,6 @@
     Função: Desliga a escrita e move os contadores r_reg e c_reg para o próximo pixel de saída, pulando as bordas.
 
     Ações (no clock):
-
-        ram_saida_we <= '0' (Desliga a escrita!).
 
         (Lógica para incrementar c_reg):
 
