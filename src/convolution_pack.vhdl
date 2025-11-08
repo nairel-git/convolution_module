@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use ieee.math_real.all;
 
-package convolution_definitions is
+package convolution_pack is
 
 
     --type datapath_configuration_t is record
@@ -24,9 +24,9 @@ package convolution_definitions is
     -- Calcula o número de bits necessários para indexar todasas amostras
     function address_length(img_width : positive; img_height : positive) return positive;
 
-end package convolution_definitions;
+end package convolution_pack;
 
-package body convolution_definitions is
+package body convolution_pack is
 
     -- Função que determina a largura do endereço (em bits) necessário para indexar os
     -- vetores parciais de P amostras. Calcula log2(samples_per_block / parallel_samples), com arredondamento.
@@ -36,4 +36,4 @@ package body convolution_definitions is
         return integer(ceil(log2(real(img_width) * real(img_height))));
     end function address_length;
 
-end package body convolution_definitions;
+end package body convolution_pack;

@@ -4,7 +4,6 @@
 
 ## S_IDLE
 
-
     done <= 1 (Sinaliza que o trabalho está feito)
     x_reg <= 0 (Prepara para começar na coluna 0)
     y_reg <= 0 (Prepara para começar na linha 0)
