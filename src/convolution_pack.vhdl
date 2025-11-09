@@ -10,7 +10,7 @@ package convolution_pack is
 
     --end record;
 
-
+    
 
     -- Tipo que representa um kernel 3x3 de convolução com coeficientes inteiros de -128 a 127.
     type kernel_array is array (0 to 8) of integer range -128 to 127;
@@ -21,8 +21,12 @@ package convolution_pack is
                                                      -1, -1, -1);
 
 
-    -- Calcula o número de bits necessários para indexar todasas amostras
+    -- Calcula o número de bits necessários para indexar todas as amostras
     function address_length(img_width : positive; img_height : positive) return positive;
+
+    -- Função para calcular o número de bits necessários 
+    -- para armazenar 'n' valores (ex: 0 até n-1)
+    function log2_ceil(n : positive) return natural;
 
 end package convolution_pack;
 
@@ -35,5 +39,12 @@ package body convolution_pack is
     begin
         return integer(ceil(log2(real(img_width) * real(img_height))));
     end function address_length;
+
+
+    function log2_ceil(n : positive)
+    return natural is
+    begin
+        return integer(ceil(log2(real(n))));
+    end function log2_ceil;
 
 end package body convolution_pack;

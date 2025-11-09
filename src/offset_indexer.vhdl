@@ -9,9 +9,13 @@ entity offset_indexer is
         img_height : positive
     );
     port(
-        in_x, in_y   : in  unsigned(address_length(img_width, img_height) downto 0);
-        out_x, out_y : out unsigned(address_length(img_width, img_height) downto 0);
-        index        : in  unsigned(4 downto 0);
+        in_x   : in  unsigned(log2_ceil(img_width) - 1 downto 0);
+        in_y : in unsigned(log2_ceil(img_height) - 1 downto 0);
+        out_x  : out unsigned(log2_ceil(img_width) - 1 downto 0);
+        out_y  : out unsigned(log2_ceil(img_height) -1 downto 0);
+
+
+        index        : in  unsigned(3 downto 0);
         invalid      : out std_logic
     );
 end entity;
@@ -63,9 +67,9 @@ begin
         -- verifica limites
         if (tx_int < 0) or (tx_int >= img_width) or (ty_int < 0) or (ty_int >= img_height) then
             invalid <= '1';
-            
-            out_x   <= in_x;
-            out_y   <= in_y;
+    
+            out_x <= in_x;
+            out_y <= in_y;
         else
             invalid <= '0';
             out_x   <= to_unsigned(tx_int, out_x'length);

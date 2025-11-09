@@ -1,3 +1,5 @@
 .settings
 .project
 .library_mapping.xml
+*.vcd
+*.cf
