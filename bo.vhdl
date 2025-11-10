@@ -120,7 +120,7 @@ begin
         );
         
 
-    Multiplier: entity work.multi
+    Multiplier: entity work.multiplier
         port map(
             a_signed   => coef_out,
             b_unsigned => sample_in,

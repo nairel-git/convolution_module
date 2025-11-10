@@ -4,10 +4,8 @@ use ieee.numeric_std.all;
 
 entity generic_counter is
     generic(
-        -- Define o tamanho do contador (número de bits)
-        G_NBITS     : positive := 8;
-        -- Valor máximo que o contador vai contar (em inteiro)
-        G_MAX_COUNT : natural  := 255
+        G_NBITS     : positive := 8;    -- Define o tamanho do contador (número de bits)
+        G_MAX_COUNT : natural  := 255   -- Valor máximo que o contador vai contar (em inteiro)
     );
     port(
         clock  : in  std_logic;

@@ -2,16 +2,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity multi is
+entity multiplier is
     port(
         a_signed   : in  signed(7 downto 0);
         b_unsigned : in  unsigned(7 downto 0);
         result_out : out signed(15 downto 0)  -- resultado completo sem overflow
     );
-end entity multi;
+end entity multiplier;
 
 
-architecture rtl of multi is
+architecture rtl of multiplier is
 begin
     process(a_signed, b_unsigned)
         variable int_a    : integer;

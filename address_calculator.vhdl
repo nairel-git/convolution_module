@@ -11,7 +11,6 @@ entity address_calculator is
     port(
         in_x     : in  unsigned(log2_ceil(img_width) - 1 downto 0);
         in_y     : in  unsigned(log2_ceil(img_height) - 1 downto 0);
-        -- A porta de saída agora é std_logic_vector
         out_addr : out unsigned(address_length(img_width, img_height) - 1 downto 0)
     );
 end entity address_calculator;
