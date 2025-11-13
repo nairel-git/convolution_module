@@ -55,7 +55,7 @@
                 <mxCell id="292" value="Calculadora de Endereço&lt;br&gt;&lt;div&gt;Y * img_width + X&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="880" y="180" width="144" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="294" value="&amp;nbsp;X&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" edge="1">
+                <mxCell id="294" value="&amp;nbsp;X&amp;nbsp;" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" parent="1" edge="1" source="173">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="764" y="210" as="sourcePoint"/>
                         <mxPoint x="880" y="210" as="targetPoint"/>
@@ -144,10 +144,10 @@
                 </mxCell>
                 <mxCell id="334" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.75;entryY=1;entryDx=0;entryDy=0;" parent="1" target="381" edge="1">
                     <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="1160" y="491" as="sourcePoint"/>
+                        <mxPoint x="1160" y="494" as="sourcePoint"/>
                         <mxPoint x="570" y="630" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="1160" y="491"/>
+                            <mxPoint x="1160" y="494"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
@@ -264,7 +264,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="385" value="" style="group" vertex="1" connectable="0" parent="1">
-                    <mxGeometry x="930" y="650" width="70" height="70" as="geometry"/>
+                    <mxGeometry x="970" y="650" width="70" height="70" as="geometry"/>
                 </mxCell>
                 <mxCell id="386" value="clip" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="385">
                     <mxGeometry width="70" height="70" as="geometry"/>
@@ -273,8 +273,8 @@
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="780" y="780" as="sourcePoint"/>
                         <Array as="points">
-                            <mxPoint x="870" y="780"/>
-                            <mxPoint x="870" y="685"/>
+                            <mxPoint x="930" y="780"/>
+                            <mxPoint x="930" y="685"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
