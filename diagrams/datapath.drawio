@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Nkfd05BYg3lAql65q9yo" name="Page-1">
-        <mxGraphModel dx="1278" dy="916" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+        <mxGraphModel dx="1448" dy="392" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -47,7 +47,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="295" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 255, 0));&quot;&gt;end&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;" parent="1" source="292" edge="1">
+                <mxCell id="295" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(0, 255, 0));&quot;&gt;addr&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;" parent="1" source="292" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1050" y="10" as="targetPoint"/>
                     </mxGeometry>
@@ -79,7 +79,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="326" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 128, 0));&quot;&gt;janela_pronta&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;" parent="1" source="306" edge="1">
+                <mxCell id="326" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 128, 0));&quot;&gt;done_window&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;" parent="1" source="306" edge="1">
                     <mxGeometry x="0.4505" relative="1" as="geometry">
                         <mxPoint x="10" y="220" as="targetPoint"/>
                         <Array as="points">
@@ -91,7 +91,7 @@
                 <mxCell id="306" value="Contador Janela&lt;br&gt;&lt;div&gt;0 to 8&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="100" y="280" width="144" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="325" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 128, 0));&quot;&gt;coluna_pronta&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.563;exitY=-0.021;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="307" edge="1">
+                <mxCell id="325" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 128, 0));&quot;&gt;done_width&lt;/font&gt;" style="edgeStyle=orthogonalEdgeStyle;html=1;exitX=0.563;exitY=-0.021;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="307" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="170" y="10" as="targetPoint"/>
                         <mxPoint x="210" y="60" as="sourcePoint"/>
