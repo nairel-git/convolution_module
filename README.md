@@ -19,14 +19,14 @@ O projeto consiste no desenvolvimento de um **módulo digital de convolução** 
 O sistema realiza o **cálculo da convolução** de cada pixel da imagem com um **kernel 3×3**, a fim de aplicar filtros inteiros como *sharpen* ou *sobel* e *emboss*.
 
 A arquitetura foi dividida em **módulos reutilizáveis e parametrizáveis**, permitindo que o circuito aceite imagens de tamanhos genéricos `img_width × img_height`.  
-O kernel é armazenado em uma **ROM** de 9 valores (um para cada posição da janela 3×3), cada valor com sendo um inteiro de **4 bits signed**, facilitando a normalização dos resultados.
+O kernel é armazenado em uma **ROM** de 9 valores (um para cada posição da janela 3×3), cada valor com sendo um inteiro de **4 bits signed**, limitando o numero de kernels possiveis porém facilitando a normalização dos resultados.
 
 ### Funcionamento Geral
 
 1. A imagem de entrada é armazenada em uma **ROM** (memória de pixels).  
 2. O **módulo de convolução** percorre a imagem linha a linha.  
 3. A cada 9 ciclos de clock, uma nova janela 3×3 é formada e o valor convoluído do pixel central é calculado.  
-4. O valor resultante é **clipado** (limitado entre 0 e 255) e armazenado ou enviado como saída.  
+4. O valor resultante é **clipado** (limitado entre 0 e 255) e enviado como saída.  
 5. O processo se repete até todos os pixels da imagem serem processados.
 
 ---
