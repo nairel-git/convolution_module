@@ -56,10 +56,14 @@ Componente que recebe as coordenadas atuais (**X, Y**) e o índice local da jane
 - **Entradas:**  
   - `x`, `y` - coordenadas atuais  
   - `index` - índice 0–8 dentro da janela  
-  - `invalid` -  
 
 - **Saída:**  
   - `x` → coordenada X do pixel a ser lido.
   - `y` → coordenada Y do pixel a ser lido.
+  - `invalid` - sinal de controle que indica operação inválida (borda da imagem)
 
-O cálculo é feito combinacionalmente, todos os enreços possiveis são calculados porém só o relevante é selecionado a partir de um decodificador usando a entrada index.
+O cálculo é feito combinacionalmente, todos os endereços possiveis são calculados porém só o relevante é selecionado a partir de um decodificador usando a entrada index.
+
+## Máquina de estados
+
+O processo começa no estado Idle. O próximo estado é obrigatoriamente o começo do processo de convolução, entrando no primeiro de três estados do looping que realiza a operação. O primeiro estado irá calcular o endereço a ser lido da memória. Caso seja um endereço válido, no próximo estado será feita a leitura da memória, e após isso, no próximo estado, será feita a multiplicação e soma no acumulador. Caso o endereço seja inválido (em casos onde o índice atual é a borda da imagem), o estado de leitura da memória será pulado, e o próximo estado será um outro estado de soma que emite um sinal para somar zero ao acumulador. Fora do looping há estados para o incremento do valor de índice, tanto de linha quanto de coluna.
