@@ -37,19 +37,13 @@ package convolution_pack is
         1, 1, 1
     );
 
-    constant sharpen : kernel_array := (
+    constant kernel_sharpen : kernel_array := (
         0, -1, 0,
         -1, 5, -1,                 
         0, -1, 0
     );
 
-    constant emboss : kernel_array := (
-        -2, -1, 0,
-        -1, 1, 1,                 
-        0, 1, 2
-    );
-
-    constant emboss : kernel_array := (
+    constant kernel_emboss : kernel_array := (
         -2, -1, 0,
         -1, 1, 1,                 
         0, 1, 2
